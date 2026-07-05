@@ -4,11 +4,34 @@ Guidance for Claude Code (and other AI assistants) working in this repository.
 
 ## What this is
 
-`brain-storm` is a source repo for different development ideas/experiments. Each idea lives
-as its own module, developed independently by default — but modules are allowed to depend on
-or interoperate with each other when the idea actually calls for it. Isolation is the
-default, not a hard rule: don't force artificial independence between modules that are
-genuinely related, and don't casually couple modules that aren't.
+`brain-storm` is a **business-idea incubator**, not a plain code repo. Each module is a
+hypothesis about a market niche, refined until it's validated or discarded. The code inside
+a module is the vehicle for testing the idea quickly (usually a prototype/MVP with Claude as
+the backend); the business hypothesis is the actual deliverable. Discarding an idea with
+documented learnings is also a valid, valuable outcome.
+
+Each idea lives as its own module, developed independently by default — but modules are
+allowed to depend on or interoperate with each other when the idea actually calls for it.
+Isolation is the default, not a hard rule: don't force artificial independence between
+modules that are genuinely related, and don't casually couple modules that aren't.
+
+## The PITCH.md convention
+
+Every module MUST have a `PITCH.md` at its root capturing the business hypothesis. This is
+what makes the repo refine *ideas* and not just software. Sections:
+
+- **Nicho** — the market niche in one line.
+- **Problema** — what pain it solves, and how it's solved today.
+- **Cliente** — who pays, and a rough sense of how much / how often.
+- **Por qué ahora** — what Claude/LLMs made possible that used to be too expensive.
+- **MVP** — the smallest thing that tests demand (usually what the module's code implements).
+- **Monetización** — plausible pricing/packaging.
+- **Señales de validación** — what evidence would move the idea forward or kill it.
+- **Estado** — one of: `explorando` / `prototipado` / `validado` / `descartado`.
+- **Aprendizajes** — running log of what was learned (especially if descartado).
+
+When starting a new module, write the `PITCH.md` first — the code follows the hypothesis,
+not the other way around. When an idea's status changes, update its `PITCH.md`.
 
 ## Current state
 
@@ -19,6 +42,8 @@ module is self-contained.
 
 ### `fable-forge/` — generador de fábulas interactivas
 
+- **Niche hypothesis:** personalized children's content (see `fable-forge/PITCH.md`).
+  Status: `prototipado`.
 - **What:** CLI that generates original fables (animal characters, conflict, explicit
   moral) from a moral/theme + audience + tone. Supports format variants (shorter, verse,
   narration script, per-scene illustration prompts) and series with recurring characters.
@@ -34,9 +59,10 @@ module is self-contained.
 
 ## Conventions established so far
 
-- Module layout: top-level directory per idea, with its own `README.md`,
-  `requirements.txt` (or equivalent), `.gitignore`, and source package inside. Generated
-  artifacts go in a gitignored `output/` inside the module.
+- Module layout: top-level directory per idea, with its own `PITCH.md` (business
+  hypothesis — see above), `README.md` (how to run it), `requirements.txt` (or
+  equivalent), `.gitignore`, and source package inside. Generated artifacts go in a
+  gitignored `output/` inside the module.
 - Python modules are runnable as `python -m <package>` from the module directory; no
   repo-wide virtualenv or installer is assumed.
 - Modules that call the Claude API read credentials from the environment
