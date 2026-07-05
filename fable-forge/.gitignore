@@ -1,0 +1,4 @@
+# Fábulas y series generadas localmente
+output/
+__pycache__/
+*.pyc
